@@ -52,7 +52,7 @@ useEffect(() => {
   try{
     fetchCountryData(countryCode); //Fetch country data when the country code changes.
   }catch(err){
-    console.log();
+    console.log(); //Ignore error on purpose. Doesn't work lol.
   }
    
 }, [countryCode])
@@ -71,7 +71,7 @@ useEffect(() => {
       setCurrentCountryInfo(currentCountryInfoString);
     }
   }catch(err){
-    console.log();
+    console.log(); //Ignore error on purpose. Doesn't work lol.
   }
   
 }, [countryData])
