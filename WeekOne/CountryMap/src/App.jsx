@@ -6,6 +6,7 @@ import CountryMap from './countryMap'
 function App() {
   const [countryCode, setCountryCode] = useState('');
   const [countryData, setCountryData] = useState('');
+  const [currentCountryInfo, setCurrentCountryInfo] = useState(''); //State to store the current country info. [country, population, area, borders
   const mapRef = useRef(null); //How to reference DOM elements in React
   const previousCountryRef = useRef(null); //How to reference DOM elements in React
 
@@ -65,6 +66,9 @@ useEffect(() => {
     previousCountryRef.current = country;
     if(country){
       country.style.fill = "red";
+      console.log(`Country: ${countryData.name.common}\nPopulation: ${countryData.population}\nArea: ${countryData.area}\nBorders: ${countryData.borders}`);
+      let currentCountryInfoString = `Country: ${countryData.name.common}\nPopulation: ${countryData.population}\nArea: ${countryData.area}\nBorders: ${countryData.borders}`;
+      setCurrentCountryInfo(currentCountryInfoString);
     }
   }catch(err){
     console.log();
@@ -103,6 +107,7 @@ function fetchCountryData(id){
     <>
     <div ref={mapRef}>
       <CountryMap/>
+      <p style={{whiteSpace: 'pre-line'}}>{currentCountryInfo}</p>
     </div>
     </>
   )
