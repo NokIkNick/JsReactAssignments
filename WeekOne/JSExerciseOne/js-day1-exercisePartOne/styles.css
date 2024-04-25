@@ -1,0 +1,23 @@
+.mydiv { 
+    width: 25px; height: 25px;
+    background-color: yellow; margin: 1px; 
+  }
+
+.testdiv{
+    width: 100px; height: 100px;
+    background-color: yellow; margin: 1px; 
+}
+button{
+    width: 100px; height: 100px;
+}
+#submit{
+    width: 70px; height: 30px; 
+}
+
+#filterSubmit{
+    width: 70px; height: 30px; 
+}
+
+#text{
+    font-size: large;
+}
