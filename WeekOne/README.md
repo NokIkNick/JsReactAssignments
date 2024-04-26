@@ -1,5 +1,8 @@
 # JsReactAssignments - WeekOne
 
+# Nicklas Waldemar Seier Winther
+# nw-89@cphbusiness.dk
+
 # Done assignments:
 
 - Javascript Exercise 0
