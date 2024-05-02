@@ -5,16 +5,24 @@ import PokeList from './components/PokeList.jsx'
 import {fetchAll} from './util/crud.js'
 
 function App() {
+  const blankPokemonTemplate = {
+    id: '',
+    name: '',
+    types: [{ type: { name: '' } }, { type: { name: '' } }],
+    abilities: [{ ability: { name: '' } }, { ability: { name: '' } }, { ability: { name: '' } }],
+  };
+
   const[pokemons, setPokemons] = useState([]);
+  const[blankPokemon, setBlankPokemon] = useState(blankPokemonTemplate);
 
   useEffect(() => {
-    fetchAll(data => setPokemons(data));
-  }, )
+    fetchAll((data) => setPokemons(data)).then(() => console.log('Pokemons fetched!'));
+  }, [])
 
   return (
     <>
-      <PokeForm />
-      <PokeList pokemons={pokemons} />
+      <PokeForm/>
+      {pokemons && <PokeList pokemons={pokemons} blankPokemon={blankPokemon}/>}
     </>
   )
 }

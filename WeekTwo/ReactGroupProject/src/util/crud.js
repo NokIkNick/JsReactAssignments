@@ -1,13 +1,20 @@
 
-function fetchAll(callback){
-    fetch('http://localhost:3001/pokemon')
-    .then(res => res.json()).then(data => callback(data)).catch(err => console.log(err));
+const API_URL = 'http://localhost:3001/pokemon';
+
+async function fetchAll(callback){
+    try{
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        callback(data);
+    }catch(err){
+        console.log(err);
+    }
 }
 
 
-function createPokemon(pokemon, callback){
+async function createPokemon(pokemon, callback){
     const {id, pokemonWithoutId} = pokemon;
-    fetch('http://localhost:3001/pokemon', {
+    fetch(API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,14 +23,14 @@ function createPokemon(pokemon, callback){
     }).then(res => res.json()).then(data => callback(data)).catch(err => console.log(err));
 }
 
-function updatePokemon(pokemon, callback){
-    fetch(`http://localhost:3001/pokemon/${pokemon.id}`, {method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(pokemon)})
+async function updatePokemon(pokemon, callback){
+    fetch(`${API_URL}/${pokemon.id}`, {method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(pokemon)})
     .then(res => res.json()).then(data => callback(data))
     .catch(err => console.log(err));
 }
 
-function deletePokemon(pokemon, callback){
-    fetch(`http://localhost:3001/pokemon/${pokemon.id}`, {method: 'DELETE', headers: {'Content-Type':'application/json}'}})
+async function deletePokemon(pokemon, callback){
+    fetch(`${API_URL}/${pokemon.id}`, {method: 'DELETE', headers: {'Content-Type':'application/json}'}})
     .then(res => res.json()).then(data => callback(data))
     .catch(err => console.log(err));
 }

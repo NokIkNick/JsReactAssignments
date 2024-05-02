@@ -5,38 +5,116 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.delete{
+  cursor: pointer;
+  background-color: red;
+  border: #000000 0.09rem solid;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.edit{
+  cursor: pointer;
+  background-color: rgb(46, 149, 209);
+  border: #000000 0.09rem solid;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  border: solid rgb(0, 0, 0) 1px;
 }
 
-.card {
-  padding: 2em;
+tr{
+  border: solid rgb(0, 0, 0) 1px;
 }
 
-.read-the-docs {
-  color: #888;
+th, td{
+  padding: 0.5rem;
 }
+
+td{
+  border: solid rgb(0, 0, 0) 1px;
+}
+
+th{
+  background-color: #414141;
+  border: solid rgb(0, 0, 0) 1px;
+}
+
+
+.grass{
+  background-color: #3acc3a;
+}
+
+.poison{
+  background-color: #b97fc9;
+}
+
+.fire{
+  background-color: #f08030;
+}
+
+.flying{
+  background-color: #b6a5e9;
+}
+
+.water{
+  background-color: #6890f0;
+}
+
+.bug{
+  background-color: #a8b820;
+}
+
+.normal{
+  background-color: #808080;
+}
+
+.electric{
+  background-color: #f8d030;
+}
+
+.ground{
+  background-color: #e0c068;
+}
+
+.fairy{
+  background-color: #ee99ac;
+}
+
+.fighting{
+  background-color: #c4443d;
+}
+
+.psychic{
+  background-color: #f85888;
+}
+
+.rock{
+  background-color: #b8a038;
+}
+
+.steel{
+  background-color: #b8b8d0;
+}
+
+.ice{
+  background-color: #98d8d8;
+}
+
+.ghost{
+  background-color: #705898;
+}
+
+.dragon{
+  background-color: #7038f8;
+}
+
+.dark{
+  background-color: #705848;
+}
+
+.slot3{
+  background-color: #fbff03;
+}
+
