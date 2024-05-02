@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 
 const PokeForm = ({blankPokemon}) => {
-  const[currentPokemon, setCurrentPokemon] = useState({...blankPokemon});
-  const[resetKey, setResetKey] = useState(0);
+  const[currentPokemon, setCurrentPokemon] = useState({...blankPokemon}); //The currentPokemon that is being created or edited
+  const[resetKey, setResetKey] = useState(0); //The key to reset the form needed to remount.
 
   const handleReset = (e) => {
     e.preventDefault();
     setCurrentPokemon({...blankPokemon});
-    setResetKey(prevKey => prevKey + 1);
+    setResetKey(prevKey => prevKey + 1); //Remount the form
   }
 
   const handleOnChange = (e) => {
-    if (e.target.name === 'ability') {
+    if (e.target.name === 'ability') { //Because the ability is an array of objects, and we don't know for sure if a pokemon has 1 or more abilities, we need to split the string and map it to an array of objects.
       const abilities = e.target.value.split(', ').map(name => ({ ability: { name } }));
       setCurrentPokemon(prevState => ({ ...prevState, abilities }));
     } else {
@@ -28,9 +28,11 @@ const PokeForm = ({blankPokemon}) => {
 
     <>
     <div>{JSON.stringify(currentPokemon)}</div>
+
     <form class="form-inline" onSubmit={handleSubmit} key={resetKey}>
       <input type='text' id='id' name='id' placeholder='ID' readOnly onChange={handleOnChange} value={currentPokemon.id}/>
       <input type='text' id='name' name='name' placeholder='Name' onChange={handleOnChange} value={currentPokemon.name}/>
+      {/*Checking if the currentPokemon types array is not undefined, and currentPokemon.types[0].type is not undefined.*/}
       <select id='type1' name='type1' onChange={handleOnChange} value={currentPokemon.types && currentPokemon.types[0].type ? currentPokemon.types[0].type.name : ''}>
         <option defaultChecked>Select typing 1</option>
         <option value='normal'>Normal</option>
@@ -52,6 +54,7 @@ const PokeForm = ({blankPokemon}) => {
         <option value='steel'>Steel</option>
         <option value='fairy'>Fairy</option>
       </select>
+      {/*Checking if the currentPokemon types array is not undefined, and currentPokemon.types[1].type is not undefined.*/}
       <select id='type2' name='type2' onChange={handleOnChange} value={currentPokemon.types && currentPokemon.types[1].type ? currentPokemon.types[1].type.name : ''}>
         <option defaultChecked>Select typing 2</option>
         <option value='normal'>Normal</option>
@@ -73,6 +76,7 @@ const PokeForm = ({blankPokemon}) => {
         <option value='steel'>Steel</option>
         <option value='fairy'>Fairy</option>
       </select>
+      {/*Checking if the currentPokemon.abilites array is not undefined, and if so, we splice it upto 3 times, because a pokemon can have a max of 3 abilites*/}
       <input type='text' id='ability' name='ability' placeholder='Ability' value={currentPokemon.abilities ? currentPokemon.abilities.slice(0, 3).map(ability => ability.ability.name).join(', ') : ''
   } onChange={handleOnChange}/>
       <button type='button' onClick={handleReset}>Reset</button>
