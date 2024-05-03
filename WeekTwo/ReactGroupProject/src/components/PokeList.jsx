@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 
-const pokeList = ({pokemons}) => {
-  const[currentPokemon, setCurrentPokemon] = useState({id: '', name: '', types: [], abilities: []});
+const pokeList = ({pokemons, editPokemon, deletePokemon}) => {
+
   
   return (
     <>
-    <div>{pokemons && pokemons.length > 0 ? <h1>Pokedex</h1> : 'No pokemon'}
+    <div>{pokemons && pokemons.length > 0 ? <h2>GEN 1 POKÉMON:</h2> : 'No pokemon'}
     
     <table class="table table-striped">
       <thead>
@@ -38,8 +38,8 @@ const pokeList = ({pokemons}) => {
               })}
               </td>
               <td>
-                <button id={pokemon.id} class="edit">Edit</button>
-                <button id={pokemon.id} class="delete">Delete</button>
+                <button onClick={() => editPokemon(pokemon)} class="edit">Edit</button>
+                <button onClick={() => deletePokemon(pokemon)} class="delete">Delete</button>
               </td>
             </tr>
           );

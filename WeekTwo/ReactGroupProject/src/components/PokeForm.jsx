@@ -1,12 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
-const PokeForm = ({blankPokemon}) => {
-  const[currentPokemon, setCurrentPokemon] = useState({...blankPokemon}); //The currentPokemon that is being created or edited
+const PokeForm = ({blankPokemon, pokemonToEdit, mutatePokemon}) => {
+  const[currentPokemon, setCurrentPokemon] = useState({...pokemonToEdit}); //The currentPokemon that is being created or edited
   const[resetKey, setResetKey] = useState(0); //The key to reset the form needed to remount.
+
+
+  useEffect(() => {
+    setCurrentPokemon(pokemonToEdit);
+  }, [pokemonToEdit])
 
   const handleReset = (e) => {
     e.preventDefault();
-    setCurrentPokemon({...blankPokemon});
+    setCurrentPokemon(blankPokemon);
     setResetKey(prevKey => prevKey + 1); //Remount the form
   }
 
@@ -14,21 +19,27 @@ const PokeForm = ({blankPokemon}) => {
     if (e.target.name === 'ability') { //Because the ability is an array of objects, and we don't know for sure if a pokemon has 1 or more abilities, we need to split the string and map it to an array of objects.
       const abilities = e.target.value.split(', ').map(name => ({ ability: { name } }));
       setCurrentPokemon(prevState => ({ ...prevState, abilities }));
-    } else {
+    }else if (e.target.name === 'type1'){
+      const type = { type: { name: e.target.value } };
+      setCurrentPokemon(prevState => ({ ...prevState, types: [type, prevState.types[1] || { type: { name: '' } }]}));
+    }else if(e.target.name === 'type2'){
+      const type = { type: { name: e.target.value } };
+      setCurrentPokemon(prevState => ({ ...prevState, types: [prevState.types[0], type || { type: { name: '' } }]}));
+    }else {
       setCurrentPokemon({...currentPokemon, [e.target.name]: e.target.value});
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(currentPokemon);
+    mutatePokemon(currentPokemon);
+    setCurrentPokemon(blankPokemon);
   }
   
   return (
 
     <>
-    <div>{JSON.stringify(currentPokemon)}</div>
-
+    <h1>POKÉDEX</h1>
     <form class="form-inline" onSubmit={handleSubmit} key={resetKey}>
       <input type='text' id='id' name='id' placeholder='ID' readOnly onChange={handleOnChange} value={currentPokemon.id}/>
       <input type='text' id='name' name='name' placeholder='Name' onChange={handleOnChange} value={currentPokemon.name}/>
