@@ -23,6 +23,11 @@ export default function Timer(){
         setStarted(true);
     }
 
+    function preDefTime(event){
+        const minutes = Number(event.target.id);
+        setMinutes(minutes);
+    }
+
     //Function that pauses the timer.
     function pauseTimer(){
         setStarted(false);
@@ -65,6 +70,11 @@ export default function Timer(){
         <>
             <div>
                 <h2>Time Remaining: {formatTime(time)}</h2>
+            </div>
+            <div>
+                <button id="5" onClick={preDefTime}>5 Min</button>
+                <button id="10" onClick={preDefTime}>10 Min</button>
+                <button id="15" onClick={preDefTime}>15 Min</button>
             </div>
             <div>
                 <input type="number" placeholder="Minutes" value={minutes} onChange={(e) => setMinutes(parseInt(e.target.value))}></input>

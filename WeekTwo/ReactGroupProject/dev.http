@@ -1,0 +1,23 @@
+GET http://localhost:3001/pokemon
+###
+
+POST http://localhost:3001/pokemon
+Content-Type: application/json
+
+{
+    name: 'newMon',
+    types: [{ type: { name: 'FIRE' } }, { type: { name: 'DRAGON' } }],
+    abilities: [{ ability: { name: 'OVERGROW' } }],
+};
+###
+
+PUT http://localhost:3001/pokemon/1
+Content-Type: application/json
+
+{
+    "name": "newName",
+}
+###
+
+
+DELETE https://api.example.com/users/1

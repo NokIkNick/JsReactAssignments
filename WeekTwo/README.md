@@ -23,3 +23,4 @@
 - React: List and Keys. (Both State and List and Keys can be found in the folder "stateExercise").
 - React: Tick Counter
 - React: Crud with Forms.
+- React: Group Project (did alone)
