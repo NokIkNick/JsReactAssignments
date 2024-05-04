@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import PokeForm from './components/PokeForm.jsx'
 import PokeList from './components/PokeList.jsx'
+import { ImagePopUp } from './components/ImagePopUp.jsx'
 import {fetchAll, deletePokemonById, createPokemon, updatePokemonCrud} from './util/crud.js'
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
   const[pokemons, setPokemons] = useState([]);
   const[blankPokemon, setBlankPokemon] = useState(blankPokemonTemplate);
   const[pokemonToEdit, setPokemonToEdit] = useState(blankPokemonTemplate);
+  const[pokemonToShow, setPokemonToShow] = useState(blankPokemonTemplate);
+  const [show, setShow] = useState(false);
 
 
   const mutatePokemon = (pokemon) => {
@@ -41,8 +44,13 @@ function App() {
       const updatedPokemons = pokemons.filter(p => p.id !== data.id);
       setPokemons(updatedPokemons);
     });
-
   }
+
+  const pickPokemonToShow = (pokemon) => {
+    setShow(true);
+    setPokemonToShow(pokemon);
+  }
+
 
   useEffect(() => {
     fetchAll((data) => setPokemons(data)).then(() => console.log('Pokemons fetched!'));
@@ -51,7 +59,8 @@ function App() {
   return (
     <>
       <PokeForm pokemonToEdit={pokemonToEdit} blankPokemon={blankPokemon} mutatePokemon={mutatePokemon}/>
-      {pokemons && <PokeList pokemons={pokemons} deletePokemon={deletePokemon} editPokemon={editPokemon}/>}
+      {show && <ImagePopUp pokemonToShow={pokemonToShow} show={show} setShow={setShow}/>}
+      {pokemons && <PokeList pokemons={pokemons} deletePokemon={deletePokemon} editPokemon={editPokemon} setShow={setShow} show={show} pickPokemonToShow={pickPokemonToShow}/>}
     </>
   )
 }

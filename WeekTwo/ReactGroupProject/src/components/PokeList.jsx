@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const pokeList = ({pokemons, editPokemon, deletePokemon}) => {
+const pokeList = ({pokemons, editPokemon, deletePokemon, pickPokemonToShow}) => {
 
   
   return (
@@ -10,6 +10,7 @@ const pokeList = ({pokemons, editPokemon, deletePokemon}) => {
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>Sprite</th>
           <th>Name</th>
           <th>Typings</th>
           <th>Abiliies</th>
@@ -20,6 +21,7 @@ const pokeList = ({pokemons, editPokemon, deletePokemon}) => {
         {pokemons.map((pokemon) => {
           return (
             <tr key={pokemon.id}>
+              {<td><img onClick={() => pickPokemonToShow(pokemon)} src={pokemon.sprites ? pokemon.sprites.front_default : 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201-question.png'}></img></td>}
               <td>
               <td>{pokemon.name.toUpperCase()}</td>
               </td>

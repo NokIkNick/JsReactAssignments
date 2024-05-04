@@ -41,6 +41,11 @@ th{
   border: solid rgb(0, 0, 0) 1px;
 }
 
+img{
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
 
 .grass{
   background-color: #3acc3a;
