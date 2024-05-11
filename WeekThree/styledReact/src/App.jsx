@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { BrowserRouter, NavLink, Navigate, Outlet, Route, Routes, useNavigate, useParams } from "react-router-dom"
-import styled from "styled-components"
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useParams } from "react-router-dom"
 import { AppLayout } from "./layout/AppLayout"
 import { Home } from "./page/Home"
 import { PageNotFound } from "./page/PageNotFound"
-import { BASE_URL } from "./utils/globalVariables"
-import { Register } from "./page/Register"
 import { Login } from "./page/Login"
 import { Logout } from "./page/Logout"
 
@@ -36,7 +33,6 @@ function App() {
   }
 
 
-  
 
   return (
     <>
