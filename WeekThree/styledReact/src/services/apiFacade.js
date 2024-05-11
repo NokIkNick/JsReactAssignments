@@ -22,7 +22,7 @@ export const login = async (username, password, callback) => {
 }
 
 
-export const register = async (username, password) => {
+export const register = async (username, password, callback) => {
     try{
         const response = await fetch(`${BASE_URL}/auth/register`, {
             method: "POST",
@@ -36,11 +36,10 @@ export const register = async (username, password) => {
         });
 
         const data = await response.json();
+        callback(data);
         console.log(data);
     }catch (error){
         console.log(error);
     }
 
 }
-
-login("test", "test1234");

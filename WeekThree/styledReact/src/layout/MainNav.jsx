@@ -17,6 +17,18 @@ const NavList = styled.ul`
 const ListItem = styled.li`
   
 `
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: var(--color-sky-800);
+  &:hover {
+    color: var(--color-sky-600);
+  }
+  &.active {
+    color: var(--color-sky-400);
+    border-bottom: 2px solid var(--color-sky-400);
+  
+  }
+`
 
 export const MainNav = ({currentUser}) => {
   
@@ -31,20 +43,20 @@ export const MainNav = ({currentUser}) => {
         <NavigationBar>
           <NavList>
             <ListItem>
-              <NavLink to="home">Home</NavLink>
+              <StyledNavLink to="home">Home</StyledNavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="about">About</NavLink> 
+              <StyledNavLink to="about">About</StyledNavLink> 
             </ListItem>
             <ListItem>
-              <NavLink to="contact">Contact</NavLink>
+              <StyledNavLink to="contact">Contact</StyledNavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="posts">Posts</NavLink>
+              <StyledNavLink to="entities">Entities</StyledNavLink>
             </ListItem>
             {currentUser && <ListItem>{currentUser.username}</ListItem>}
             <ListItem>
-              {currentUser.username !== null ? <NavLink to="logout">Logout</NavLink> : <NavLink to="login">Login</NavLink>}
+              {currentUser.username !== null ? <StyledNavLink to="logout">Logout</StyledNavLink> : <StyledNavLink to="login">Login</StyledNavLink>}
             </ListItem>
           </NavList>    
         </NavigationBar>
