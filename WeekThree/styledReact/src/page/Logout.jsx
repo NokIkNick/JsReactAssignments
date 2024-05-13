@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-export const Logout = ({setCurrentUser}) => {
+export const Logout = ({setCurrentUser, isAuthenticated, setIsAuthenticated}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setCurrentUser({"token": null, "username": null});
+        setCurrentUser({"token": null, "username": null, "roles": null});
         localStorage.clear();
-        navigate("/home");
+        setIsAuthenticated(false);
+        navigate("/login");
     }, [])
 
   return (

@@ -64,7 +64,7 @@ const ErrorText = styled.p`
     color: red;`
 
 
-export const Login = ({setCurrentUser, currentUser}) => {
+export const Login = ({setCurrentUser, currentUser, isAuthenticated, setIsAuthenticated}) => {
     const [user, setUser] = useState({username: "", password: ""});
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -99,8 +99,9 @@ export const Login = ({setCurrentUser, currentUser}) => {
     const attemptLogin = async () => {
         try {
             if(user.username === "" || user.password === "") throw new Error("Username and password cannot be empty");
-            await login(user.username, user.password, (data) => setCurrentUser(data));
+            await login(user.username, user.password, (data) => {setCurrentUser(data); localStorage.setItem("currentUser", JSON.stringify(data));});
             setUser({username: "", password: ""})
+            setIsAuthenticated(true);
             navigate("/home");
         }catch(err){
             setError(err.message);
@@ -111,18 +112,15 @@ export const Login = ({setCurrentUser, currentUser}) => {
     const attemptRegister = async () => {
         try{
             if(user.username === "" || user.password === "") throw new Error("Username and password cannot be empty");
-            await register(user.username, user.password, (data) => setCurrentUser(data));
-            setUser({username: "", password: ""})
-            navigate("/home");
+            await register(user.username, user.password, (data) => console.log(data));
+            setError("User registered successfully, please login");
+            navigate("/login");
         }catch(err){
             setError(err.message);
             console.log(err);
         }
     }
     
-    useEffect(() => {
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    }, [currentUser])
 
 
     return (

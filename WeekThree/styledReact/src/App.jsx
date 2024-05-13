@@ -5,11 +5,13 @@ import { Home } from "./page/Home"
 import { PageNotFound } from "./page/PageNotFound"
 import { Login } from "./page/Login"
 import { Logout } from "./page/Logout"
+import { ProtectedRoute } from "./page/ProtectedRoute"
 
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({token: null, username: null});
+  const [currentUser, setCurrentUser] = useState({token: null, username: null, roles: null});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const Entities = ({currentUser}) => {
     return (
@@ -39,7 +41,9 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
-          <Route element={<AppLayout currentUser={currentUser}/>}>
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+            <AppLayout setIsAuthenticated={setIsAuthenticated} currentUser={currentUser} roles={currentUser.roles}/>
+          </ProtectedRoute>}>
             <Route index element={<Navigate to="home"/>}/>
             <Route path="home" element={<Home currentUser={currentUser} />}/>
             <Route path="/" element={<Home />}/>
@@ -49,10 +53,10 @@ function App() {
               <Route index element={<h1>All entities</h1>}/>
               <Route path=":entityId" element={<Entity/>} />
             </Route>
-            <Route path="/login" element={<Login setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
-            <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser}/>}/> 
-            <Route path="*" element={<PageNotFound/>}/>
             </Route>
+            <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
+            <Route path="/logout" element={<Logout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser}/>}/> 
+            <Route path="*" element={<PageNotFound/>}/>
           </Routes>
         </BrowserRouter>
       </div>

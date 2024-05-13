@@ -30,7 +30,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-export const MainNav = ({currentUser}) => {
+export const MainNav = ({currentUser, roles, setIsAuthenticated}) => {
   
   useEffect(() => {
     console.log(currentUser);
