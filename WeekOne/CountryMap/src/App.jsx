@@ -28,10 +28,8 @@ useEffect(() => {
     if(code === "RU-MAIN"){ //If the country code is RU-MAIN, change it to RU.
       code = "RU";
     }
-    //fetchCountryData(code); 
+
     setCountryCode(code);
-
-
   }
 
   if(map){ //If the map is available, add an event listener to it.
@@ -83,19 +81,9 @@ function fetchCountryData(id){
   .then(data => {
     if(data[0].cca2 === id){ //If the country code from the API matches the clicked country code, set the country data.
       
-      /* const country = document.getElementById(data[0].cca2.toLowerCase());
-      if(previousCountryRef.current){ //If there is a previously clicked country, change its color back to silver. //ALTERNATIVE WAY OF DOING IT. FORGOT DEPENDENCY ARRAY WAS A THING
-        previousCountryRef.current.style.fill = "silver";
-      }
-      previousCountryRef.current = country; //Set the current country as the previously clicked country. */
-      
       console.log(data[0])
       setCountryData(data[0]);
       
-      
-    /* if(country){
-      country.style.fill = "red";
-    } */
     }
   })
   .catch(err => console.log(err))
